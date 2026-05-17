@@ -39,14 +39,16 @@ if (isset($_SESSION['role']) && isset($_SESSION['id']) && $_SESSION['role'] == "
 	<div class="body">
 		<?php include __DIR__ . "/layout/nav.php" ?>
 		<section class="section-1">
-			<h4 class="title-2">
-				<a href="create_task.php" class="btn">Create Task</a>
-				<a href="tasks.php?due_date=Due Today">Due Today</a>
-				<a href="tasks.php?due_date=Overdue">Overdue</a>
-				<a href="tasks.php?due_date=No Deadline">No Deadline</a>
-				<a href="tasks.php">All Tasks</a>
- 
-			</h4>
+			<?php
+			$current_due_date = isset($_GET['due_date']) ? $_GET['due_date'] : '';
+			?>
+			<div class="filter-group">
+				<a href="create_task.php" class="btn"><i class="fa fa-plus"></i> Create Task</a>
+				<a href="tasks.php" class="<?php echo ($current_due_date == '') ? 'btn' : 'btn-secondary'; ?>">All Tasks</a>
+				<a href="tasks.php?due_date=Due Today" class="<?php echo ($current_due_date == 'Due Today') ? 'btn' : 'btn-secondary'; ?>">Due Today</a>
+				<a href="tasks.php?due_date=Overdue" class="<?php echo ($current_due_date == 'Overdue') ? 'btn' : 'btn-secondary'; ?>">Overdue</a>
+				<a href="tasks.php?due_date=No Deadline" class="<?php echo ($current_due_date == 'No Deadline') ? 'btn' : 'btn-secondary'; ?>">No Deadline</a>
+			</div>
          <h4 class="title-2"><?=$text?> (<?=$num_task?>)</h4>
 			<?php if (isset($_GET['success'])) {?>
       	  	<div class="success" role="alert">
