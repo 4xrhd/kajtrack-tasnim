@@ -63,7 +63,9 @@ try {
                 (1, 'Oliver Admin', 'admin', '$2y$10\$TnyR1Y43m1EIWpb0MiwE8Ocm6rj0F2KojE3PobVfQDo9HYlAHY/7O', 'admin'),
                 (2, 'Elias A.', 'elias', '$2y$10\$8xpI.hVCVd/GKUzcYTxLUO7ICSqlxX5GstSv7WoOYfXuYOO/SZAZ2', 'employee'),
                 (7, 'John', 'john', '$2y$10\$CiV/f.jO5vIsSi0Fp1Xe7ubWG9v8uKfC.VfzQr/sjb5/gypWNdlBW', 'employee'),
-                (8, 'Oliver', 'oliver', '$2y$10\$E9Xx8UCsFcw44lfXxiq/5OJtloW381YJnu5lkn6q6uzIPdL5yH3PO', 'employee');");
+                (8, 'Oliver', 'oliver', '$2y$10\$E9Xx8UCsFcw44lfXxiq/5OJtloW381YJnu5lkn6q6uzIPdL5yH3PO', 'employee'),
+                (9, 'Tasnim Rahman', 'tasnim', '$2y$10\$CiV/f.jO5vIsSi0Fp1Xe7ubWG9v8uKfC.VfzQr/sjb5/gypWNdlBW', 'admin'),
+                (10, 'Umme Hany Mitu', 'mitu', '$2y$10\$CiV/f.jO5vIsSi0Fp1Xe7ubWG9v8uKfC.VfzQr/sjb5/gypWNdlBW', 'employee');");
                 
             // Seed Default Tasks
             $conn->exec("INSERT INTO tasks (id, title, description, assigned_to, due_date, status) VALUES 

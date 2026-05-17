@@ -73,15 +73,66 @@ if (isset($_SESSION['role']) && isset($_SESSION['id']) && $_SESSION['role'] == "
 					<td><?=$task['description']?></td>
 					<td>
 						<?php 
-                  foreach ($users as $user) {
-						if($user['id'] == $task['assigned_to']){
-							echo $user['full_name'];
-						}}?>
-	            </td>
-	            <td><?php if($task['due_date'] == "") echo "No Deadline";
-	                      else echo $task['due_date'];
-	               ?></td>
-	            <td><?=$task['status']?></td>
+						$assigned = false;
+						foreach ($users as $user) {
+							if($user['id'] == $task['assigned_to']){
+								echo '<span class="user-badge"><i class="fa fa-user-circle"></i> ' . htmlspecialchars($user['full_name']) . '</span>';
+								$assigned = true;
+								break;
+							}
+						}
+						if (!$assigned) {
+							echo '<span class="user-badge unassigned"><i class="fa fa-question-circle"></i> Unassigned</span>';
+						}
+						?>
+					</td>
+					<td>
+						<?php
+						$due_date_text = "";
+						$due_date_class = "";
+						if (empty($task['due_date'])) {
+							$due_date_text = "No Deadline";
+							$due_date_class = "deadline-none";
+						} else {
+							$due_date_text = $task['due_date'];
+							if ($task['status'] === 'completed') {
+								$due_date_class = "deadline-completed";
+							} else {
+								$today = date('Y-m-d');
+								if ($task['due_date'] < $today) {
+									$due_date_class = "deadline-overdue";
+								} elseif ($task['due_date'] === $today) {
+									$due_date_class = "deadline-today";
+								} else {
+									$due_date_class = "deadline-future";
+								}
+							}
+						}
+						?>
+						<span class="deadline-badge <?php echo $due_date_class; ?>">
+							<i class="fa fa-calendar"></i> <?php echo htmlspecialchars($due_date_text); ?>
+						</span>
+					</td>
+					<td>
+						<?php
+						$status = $task['status'];
+						$status_class = "";
+						$status_text = "";
+						if ($status === 'completed') {
+							$status_class = "status-completed";
+							$status_text = "Completed";
+						} elseif ($status === 'in_progress') {
+							$status_class = "status-progress";
+							$status_text = "In Progress";
+						} else {
+							$status_class = "status-pending";
+							$status_text = "Pending";
+						}
+						?>
+						<span class="status-badge <?php echo $status_class; ?>">
+							<?php echo $status_text; ?>
+						</span>
+					</td>
 					<td>
 						<a href="edit-task.php?id=<?=$task['id']?>" class="edit-btn">Edit</a>
 						<a href="delete-task.php?id=<?=$task['id']?>" class="delete-btn">Delete</a>

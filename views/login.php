@@ -4,45 +4,103 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login | KajTrack</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="login-body">
+	<!-- Dynamic Background Blobs -->
+	<div class="blur-circle blur-circle-1"></div>
+	<div class="blur-circle blur-circle-2"></div>
+
+	<!-- Live Corner Theme Switcher -->
+	<button id="themeToggleBtn" class="login-theme-toggle" aria-label="Toggle Theme">
+		<i class="fa fa-moon-o"></i>
+	</button>
       
-      <form method="POST" action="handlers/login.php" class="shadow p-4">
-
-      	  <h3 class="display-4">LOGIN</h3>
-      	  <?php if (isset($_GET['error'])) {?>
-      	  	<div class="alert alert-danger" role="alert">
-			  <?php echo stripcslashes($_GET['error']); ?>
+	<form method="POST" action="handlers/login.php" style="z-index: 1;">
+		<!-- Brand Logo and Header -->
+		<div class="login-header">
+			<div class="login-logo">
+				<i class="fa fa-rocket"></i>
 			</div>
-      	  <?php } ?>
+			<h2>Welcome Back</h2>
+			<p>Sign in to your KajTrack workspace to manage your tasks</p>
+		</div>
 
-      	  <?php if (isset($_GET['success'])) {?>
-      	  	<div class="alert alert-success" role="alert">
-			  <?php echo stripcslashes($_GET['success']); ?>
+		<?php if (isset($_GET['error'])) {?>
+			<div class="danger" role="alert">
+				<i class="fa fa-exclamation-circle"></i>
+				<span><?php echo stripcslashes($_GET['error']); ?></span>
 			</div>
-      	  <?php } 
+		<?php } ?>
 
-                // $pass = "123";
-                // $pass = password_hash($pass, PASSWORD_DEFAULT);
-                // echo $pass;
-      
-      	  ?>
-  
+		<?php if (isset($_GET['success'])) {?>
+			<div class="success" role="alert">
+				<i class="fa fa-check-circle"></i>
+				<span><?php echo stripcslashes($_GET['success']); ?></span>
+			</div>
+		<?php } ?>
 			
-		  <div class="mb-3">
-		    <label for="exampleInputEmail1" class="form-label">User name</label>
-		    <input type="text" class="form-control" name="user_name">
-		  </div>
-		  <div class="mb-3">
-		    <label for="exampleInputPassword1" class="form-label">Password</label>
-		    <input type="password" class="form-control" name="password" id="exampleInputPassword1">
-		  </div>
-		  <button type="submit" class="btn btn-primary">Login</button>
-		</form>
+		<div class="input-holder">
+			<label><i class="fa fa-user-circle"></i> Username</label>
+			<input type="text" class="input-1" name="user_name" placeholder="Enter your username" required autocomplete="username">
+		</div>
 
+		<div class="input-holder">
+			<label><i class="fa fa-lock"></i> Password</label>
+			<div style="position: relative; width: 100%;">
+				<input type="password" class="input-1" name="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password" style="padding-right: 50px;">
+				<button type="button" id="togglePasswordBtn" class="password-toggle-eye" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">
+					<i class="fa fa-eye" id="passwordEyeIcon"></i>
+				</button>
+			</div>
+		</div>
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+		<button type="submit" class="btn"><i class="fa fa-sign-in"></i> Sign In</button>
+	</form>
+
+	<script>
+		// Toggle Password Visibility
+		function togglePasswordVisibility() {
+			const passwordInput = document.getElementById('loginPassword');
+			const eyeIcon = document.getElementById('passwordEyeIcon');
+			if (passwordInput.type === 'password') {
+				passwordInput.type = 'text';
+				eyeIcon.classList.remove('fa-eye');
+				eyeIcon.classList.add('fa-eye-slash');
+			} else {
+				passwordInput.type = 'password';
+				eyeIcon.classList.remove('fa-eye-slash');
+				eyeIcon.classList.add('fa-eye');
+			}
+		}
+
+		// Theme toggle logic for login screen
+		const themeToggleBtn = document.getElementById('themeToggleBtn');
+		const icon = themeToggleBtn.querySelector('i');
+		
+		function setTheme(theme) {
+			document.body.setAttribute('data-theme', theme);
+			localStorage.setItem('theme', theme);
+			if (theme === 'light') {
+				icon.className = 'fa fa-sun-o';
+			} else {
+				icon.className = 'fa fa-moon-o';
+			}
+		}
+
+		themeToggleBtn.addEventListener('click', () => {
+			const currentTheme = document.body.getAttribute('data-theme');
+			if (currentTheme === 'light') {
+				setTheme('dark');
+			} else {
+				setTheme('light');
+			}
+		});
+
+		// Initial load theme
+		const savedTheme = localStorage.getItem('theme') || 'dark';
+		setTheme(savedTheme);
+	</script>
 </body>
 </html>

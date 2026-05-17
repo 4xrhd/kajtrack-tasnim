@@ -32,12 +32,29 @@ if (isset($_SESSION['role']) && isset($_SESSION['id']) && $_SESSION['role'] == "
 					<th>role</th>
 					<th>Action</th>
 				</tr>
-				<?php $i=0; foreach ($users as $user) { ?>
-				<tr>
+				<?php $i=0; foreach ($users as $user) { 
+					$is_admin = ($user['role'] == 'admin');
+					$row_class = $is_admin ? 'user-row-admin' : 'user-row-employee';
+				?>
+				<tr class="<?=$row_class?>">
 					<td><?=++$i?></td>
-					<td><?=$user['full_name']?></td>
-					<td><?=$user['username']?></td>
-					<td><?=$user['role']?></td>
+					<td>
+						<?php if ($is_admin) { ?>
+							<span class="admin-name-text"><i class="fa fa-shield"></i> <?=htmlspecialchars($user['full_name'])?></span>
+						<?php } else { ?>
+							<span class="employee-name-text"><i class="fa fa-user"></i> <?=htmlspecialchars($user['full_name'])?></span>
+						<?php } ?>
+					</td>
+					<td>
+						<code class="user-code-badge <?=$is_admin ? 'admin-code-badge' : ''?>"><?=htmlspecialchars($user['username'])?></code>
+					</td>
+					<td>
+						<?php if ($is_admin) { ?>
+							<span class="user-badge admin-badge"><i class="fa fa-shield"></i> Admin</span>
+						<?php } else { ?>
+							<span class="user-badge employee-badge"><i class="fa fa-user"></i> Employee</span>
+						<?php } ?>
+					</td>
 					<td>
 						<a href="edit-user.php?id=<?=$user['id']?>" class="edit-btn">Edit</a>
 						<a href="delete-user.php?id=<?=$user['id']?>" class="delete-btn">Delete</a>
