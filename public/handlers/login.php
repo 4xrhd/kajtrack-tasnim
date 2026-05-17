@@ -1,5 +1,6 @@
 <?php 
-session_start();
+session_save_path(__DIR__ . "/../../database/sessions");
+    session_start();
 if (isset($_POST['user_name']) && isset($_POST['password'])) {
 	include "../../config/DB_connection.php";
 

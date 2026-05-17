@@ -13,11 +13,11 @@ if (isset($_SESSION['role']) && isset($_SESSION['id']) && $_SESSION['role'] == "
 </head>
 <body>
 	<input type="checkbox" id="checkbox">
-	<?php include "views/layout/header.php" ?>
+	<?php include __DIR__ . "/layout/header.php" ?>
 	<div class="body">
-		<?php include "views/layout/nav.php" ?>
+		<?php include __DIR__ . "/layout/nav.php" ?>
 		<section class="section-1">
-			<h4 class="title">Profile <a href="../public/edit_profile.php">Edit Profile</a></h4>
+			<h4 class="title">Profile <a href="edit_profile.php">Edit Profile</a></h4>
          <table class="main-table" style="max-width: 300px;">
 				<tr>
 					<td>Full Name</td>
@@ -44,7 +44,7 @@ if (isset($_SESSION['role']) && isset($_SESSION['id']) && $_SESSION['role'] == "
 </html>
 <?php }else{ 
    $em = "First login";
-   header("Location: ../public/login.php?error=$em");
+   header("Location: login.php?error=$em");
    exit();
 }
  ?>

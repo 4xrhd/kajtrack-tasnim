@@ -1,5 +1,6 @@
 <?php 
-session_start();
+session_save_path(__DIR__ . "/../../database/sessions");
+    session_start();
 if (isset($_SESSION['role']) && isset($_SESSION['id'])) {
 
 if (isset($_POST['id']) && isset($_POST['status']) && $_SESSION['role'] == 'employee') {
@@ -21,7 +22,7 @@ if (isset($_POST['id']) && isset($_POST['status']) && $_SESSION['role'] == 'empl
 	    exit();
 	}else {
     
-       include "../models/Task.php";
+       include "../../models/Task.php";
 
        $data = array($status, $id);
        update_task_status($conn, $data);

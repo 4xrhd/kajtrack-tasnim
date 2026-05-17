@@ -1,14 +1,14 @@
 <?php 
 if (isset($_SESSION['role']) && isset($_SESSION['id']) && $_SESSION['role'] == "admin") {
     if (!isset($_GET['id'])) {
-    	 header("Location: ../public/tasks.php");
+    	 header("Location: tasks.php");
     	 exit();
     }
     $id = $_GET['id'];
     $task = get_task_by_id($conn, $id);
 
     if ($task == 0) {
-    	 header("Location: ../public/tasks.php");
+    	 header("Location: tasks.php");
     	 exit();
     }
    $users = get_all_users($conn);
@@ -23,11 +23,11 @@ if (isset($_SESSION['role']) && isset($_SESSION['id']) && $_SESSION['role'] == "
 </head>
 <body>
 	<input type="checkbox" id="checkbox">
-	<?php include "views/layout/header.php" ?>
+	<?php include __DIR__ . "/layout/header.php" ?>
 	<div class="body">
-		<?php include "views/layout/nav.php" ?>
+		<?php include __DIR__ . "/layout/nav.php" ?>
 		<section class="section-1">
-			<h4 class="title">Edit Task <a href="../public/tasks.php">Tasks</a></h4>
+			<h4 class="title">Edit Task <a href="tasks.php">Tasks</a></h4>
 			<form class="form-1"
 			      method="POST"
 			      action="handlers/update-task.php">
@@ -84,7 +84,7 @@ if (isset($_SESSION['role']) && isset($_SESSION['id']) && $_SESSION['role'] == "
 </html>
 <?php }else{ 
    $em = "First login";
-   header("Location: ../public/login.php?error=$em");
+   header("Location: login.php?error=$em");
    exit();
 }
  ?>

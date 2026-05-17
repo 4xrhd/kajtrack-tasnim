@@ -1,5 +1,6 @@
 <?php 
-session_start();
+session_save_path(__DIR__ . "/../../database/sessions");
+    session_start();
 if (isset($_SESSION['role']) && isset($_SESSION['id'])) {
 
 if (isset($_POST['confirm_password']) && isset($_POST['new_password']) && isset($_POST['password']) && isset($_POST['full_name']) && $_SESSION['role'] == 'employee') {
@@ -33,7 +34,7 @@ if (isset($_POST['confirm_password']) && isset($_POST['new_password']) && isset(
 	    exit();
 	}else {
     
-       include "../models/User.php";
+       include "../../models/User.php";
 
        $user = get_user_by_id($conn, $id);
        if ($user) {

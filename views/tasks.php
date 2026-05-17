@@ -35,16 +35,16 @@ if (isset($_SESSION['role']) && isset($_SESSION['id']) && $_SESSION['role'] == "
 </head>
 <body>
 	<input type="checkbox" id="checkbox">
-	<?php include "views/layout/header.php" ?>
+	<?php include __DIR__ . "/layout/header.php" ?>
 	<div class="body">
-		<?php include "views/layout/nav.php" ?>
+		<?php include __DIR__ . "/layout/nav.php" ?>
 		<section class="section-1">
 			<h4 class="title-2">
-				<a href="../public/create_task.php" class="btn">Create Task</a>
-				<a href="../public/tasks.php?due_date=Due Today">Due Today</a>
-				<a href="../public/tasks.php?due_date=Overdue">Overdue</a>
-				<a href="../public/tasks.php?due_date=No Deadline">No Deadline</a>
-				<a href="../public/tasks.php">All Tasks</a>
+				<a href="create_task.php" class="btn">Create Task</a>
+				<a href="tasks.php?due_date=Due Today">Due Today</a>
+				<a href="tasks.php?due_date=Overdue">Overdue</a>
+				<a href="tasks.php?due_date=No Deadline">No Deadline</a>
+				<a href="tasks.php">All Tasks</a>
  
 			</h4>
          <h4 class="title-2"><?=$text?> (<?=$num_task?>)</h4>
@@ -81,8 +81,8 @@ if (isset($_SESSION['role']) && isset($_SESSION['id']) && $_SESSION['role'] == "
 	               ?></td>
 	            <td><?=$task['status']?></td>
 					<td>
-						<a href="../public/edit-task.php?id=<?=$task['id']?>" class="edit-btn">Edit</a>
-						<a href="../public/delete-task.php?id=<?=$task['id']?>" class="delete-btn">Delete</a>
+						<a href="edit-task.php?id=<?=$task['id']?>" class="edit-btn">Edit</a>
+						<a href="delete-task.php?id=<?=$task['id']?>" class="delete-btn">Delete</a>
 					</td>
 				</tr>
 			   <?php	} ?>
@@ -102,7 +102,7 @@ if (isset($_SESSION['role']) && isset($_SESSION['id']) && $_SESSION['role'] == "
 </html>
 <?php }else{ 
    $em = "First login";
-   header("Location: ../public/login.php?error=$em");
+   header("Location: login.php?error=$em");
    exit();
 }
  ?>

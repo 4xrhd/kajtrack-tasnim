@@ -13,9 +13,9 @@ if (isset($_SESSION['role']) && isset($_SESSION['id'])) {
 </head>
 <body>
 	<input type="checkbox" id="checkbox">
-	<?php include "views/layout/header.php" ?>
+	<?php include __DIR__ . "/layout/header.php" ?>
 	<div class="body">
-		<?php include "views/layout/nav.php" ?>
+		<?php include __DIR__ . "/layout/nav.php" ?>
 		<section class="section-1">
 			<h4 class="title">All Notifications</h4>
 			<?php if (isset($_GET['success'])) {?>
@@ -60,7 +60,7 @@ if (isset($_SESSION['role']) && isset($_SESSION['id'])) {
 </html>
 <?php }else{ 
    $em = "First login";
-   header("Location: ../public/login.php?error=$em");
+   header("Location: login.php?error=$em");
    exit();
 }
  ?>

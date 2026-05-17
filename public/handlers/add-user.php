@@ -1,5 +1,6 @@
 <?php 
-session_start();
+session_save_path(__DIR__ . "/../../database/sessions");
+    session_start();
 if (isset($_SESSION['role']) && isset($_SESSION['id'])) {
 
 if (isset($_POST['user_name']) && isset($_POST['password']) && isset($_POST['full_name']) && $_SESSION['role'] == 'admin') {
@@ -30,7 +31,7 @@ if (isset($_POST['user_name']) && isset($_POST['password']) && isset($_POST['ful
 	    exit();
 	}else {
     
-       include "../models/User.php";
+       include "../../models/User.php";
        $password = password_hash($password, PASSWORD_DEFAULT);
 
        $data = array($full_name, $user_name, $password, "employee");

@@ -1,5 +1,6 @@
 <?php 
-session_start();
+session_save_path(__DIR__ . "/../../database/sessions");
+    session_start();
 if (isset($_SESSION['role']) && isset($_SESSION['id'])) {
 
 if (isset($_POST['title']) && isset($_POST['description']) && isset($_POST['assigned_to']) && $_SESSION['role'] == 'admin' && isset($_POST['due_date'])) {
@@ -31,8 +32,8 @@ if (isset($_POST['title']) && isset($_POST['description']) && isset($_POST['assi
 	    exit();
 	}else {
     
-       include "../models/Task.php";
-       include "../models/Notification.php";
+       include "../../models/Task.php";
+       include "../../models/Notification.php";
 
        $data = array($title, $description, $assigned_to, $due_date);
        insert_task($conn, $data);

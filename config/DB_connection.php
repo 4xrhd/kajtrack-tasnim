@@ -58,7 +58,7 @@ try {
             );");
             
             // Seed Default Users
-            // passwords match the SQL dump: admin->admin, elias->elias, john->john, oliver->oliver
+            // passwords are '123'
             $conn->exec("INSERT INTO users (id, full_name, username, password, role) VALUES 
                 (1, 'Oliver Admin', 'admin', '$2y$10\$TnyR1Y43m1EIWpb0MiwE8Ocm6rj0F2KojE3PobVfQDo9HYlAHY/7O', 'admin'),
                 (2, 'Elias A.', 'elias', '$2y$10\$8xpI.hVCVd/GKUzcYTxLUO7ICSqlxX5GstSv7WoOYfXuYOO/SZAZ2', 'employee'),

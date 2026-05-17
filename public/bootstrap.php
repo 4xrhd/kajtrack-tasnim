@@ -6,6 +6,7 @@ if (count(get_included_files()) == 1) {
 }
 
 if (session_status() === PHP_SESSION_NONE && PHP_SAPI !== 'cli') {
+    session_save_path(__DIR__ . "/../database/sessions");
     session_start();
 }
 

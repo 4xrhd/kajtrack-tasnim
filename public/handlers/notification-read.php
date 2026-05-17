@@ -1,8 +1,9 @@
 <?php 
-session_start();
+session_save_path(__DIR__ . "/../../database/sessions");
+    session_start();
 if (isset($_SESSION['role']) && isset($_SESSION['id'])) {
     include "../../config/DB_connection.php";
-    include "../models/Notification.php";
+    include "../../models/Notification.php";
 
    if (isset($_GET['notification_id'])) {
        $notification_id = $_GET['notification_id'];
