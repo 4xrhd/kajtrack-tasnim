@@ -63,29 +63,66 @@ KajTrack features a self-healing database fallback. If a MySQL connection is not
 
 ---
 
-## 💾 2. How to Run in XAMPP (Windows & Linux)
+## 💾 2. Windows & XAMPP Complete Setup Guide
 
-Deploying KajTrack inside XAMPP is straightforward:
+Deploying KajTrack on Windows using XAMPP is straightforward. Follow these steps to set up your environment:
 
-1. **Locate your XAMPP Web Root**:
-   - **Windows**: `C:\xampp\htdocs\`
-   - **Linux**: `/opt/lampp/htdocs/`
-2. **Move Project**: Copy the `kajtrack` folder directly into the web root:
-   - **Windows**: Move to `C:\xampp\htdocs\kajtrack`
-   - **Linux**: Run `sudo cp -r /path/to/project/tasnim-54/kajtrack /opt/lampp/htdocs/kajtrack`
-3. **Start Servers**: Open the XAMPP Control Panel and start **Apache** and **MySQL**.
-4. **Create Database**:
-   - Navigate to `http://localhost/phpmyadmin/` in your browser.
-   - Click **New** in the sidebar, name the database `task_management_db`, and select UTF-8 coding.
-5. **Import Schema**:
-   - Click on the newly created `task_management_db` database.
-   - Go to the **Import** tab at the top.
-   - Click **Choose File** and select `/database/task_management_db.sql` located inside the project files.
-   - Scroll to the bottom and click **Go** (or **Import**).
-6. **Open Dashboard**: Go to your browser and enter:
+### 📥 Step 1: Install and Start XAMPP
+1. Download and install [XAMPP for Windows](https://www.apachefriends.org/download.html) (PHP 8.x or higher recommended).
+2. Open the **XAMPP Control Panel** from your start menu.
+3. Click the **Start** button next to both **Apache** and **MySQL** to run the services.
+
+### 📂 Step 2: Deploy the Codebase
+1. Locate your XAMPP installation directory (usually `C:\xampp`).
+2. Navigate to the web server root directory: `C:\xampp\htdocs\`.
+3. Copy the entire `kajtrack` project directory into `htdocs`, resulting in the path:
+   ```text
+   C:\xampp\htdocs\kajtrack\
    ```
+
+### 🗄️ Step 3: Create the Database in phpMyAdmin
+1. Open your web browser and navigate to the XAMPP database management dashboard:
+   ```text
+   http://localhost/phpmyadmin/
+   ```
+2. Click on **New** in the left-hand sidebar.
+3. Under **Database name**, enter:
+   ```text
+   task_management_db
+   ```
+4. Choose `utf8mb4_general_ci` as the collation, and click **Create**.
+
+### 📥 Step 4: Import the Schema
+1. Select your newly created `task_management_db` database in the left sidebar.
+2. Click on the **Import** tab in the top navigation bar.
+3. Click **Choose File** (or **Browse**) and select the SQL schema dump file inside the project:
+   ```text
+   C:\xampp\htdocs\kajtrack\database\task_management_db.sql
+   ```
+4. Scroll to the bottom of the page and click **Import** (or **Go**). The tables will instantly populate!
+
+### ⚙️ Step 5: Verify Connection Configuration
+1. Open `C:\xampp\htdocs\kajtrack\config\DB_connection.php` in a text editor.
+2. Ensure the MySQL connection parameters align with XAMPP's default values:
+   ```php
+   $host = "localhost";
+   $user = "root";       // Default XAMPP user
+   $password = "";       // Default XAMPP password is empty
+   $db_name = "task_management_db";
+   ```
+
+### 🚀 Step 6: Open the Application
+1. In your browser, navigate to the login portal:
+   ```text
    http://localhost/kajtrack/login.php
    ```
+2. Log in using the pre-seeded credentials:
+   * **Admin (Tasnim)**: Username: `tasnim` | Password: `123`
+   * **Employee (Mitu)**: Username: `mitu` | Password: `123`
+
+> [!TIP]
+> **Zero-Config SQLite Alternative for Windows:**
+> If you prefer a sandbox environment without setting up MySQL tables or phpMyAdmin, you can just start XAMPP Apache, copy the folder, and go directly to the URL. If the MySQL connection fails, KajTrack will automatically create and seed a secure SQLite database (`C:\xampp\htdocs\kajtrack\database\task_management_db.sqlite`) with no manual intervention!
 
 ---
 
@@ -93,13 +130,14 @@ Deploying KajTrack inside XAMPP is straightforward:
 
 Both SQLite and MySQL databases are pre-seeded with the following credentials. All default passwords are the string **`123`**:
 
-### 👑 Administrator
-- **Username**: `admin`
-- **Password**: `123`
+### 👑 Administrators
+- **Tasnim Rahman** (Project Owner): Username: `tasnim` | Password: `123`
+- **Oliver Admin**: Username: `admin` | Password: `123`
 
 ### 👤 Employees
-- **John**: Username: `john` | Password: `123`
+- **Umme Hany Mitu** (Project Owner): Username: `mitu` | Password: `123`
 - **Elias**: Username: `elias` | Password: `123`
+- **John**: Username: `john` | Password: `123`
 - **Oliver**: Username: `oliver` | Password: `123`
 
 ---

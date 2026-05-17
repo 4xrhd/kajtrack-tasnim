@@ -18,7 +18,7 @@ KajTrack includes a built-in automated backend integration script to verify data
    - **Database Driver Matching**: Success of MySQL connection or SQLite fallback.
    - **User Count operations**: Confirms database table seeds match structural expectations.
    - **Task Filter Operations**: Confirms date parameters match standard `YYYY-MM-DD` and overdue flags are computed correctly.
-   - **Authentication and BCrypt Hash Validation**: Confirms matching for default user credentials (`admin` and `john` with password `123`) and rejection of incorrect passwords.
+   - **Authentication and BCrypt Hash Validation**: Confirms matching for default user credentials (`tasnim`, `admin`, `mitu`, and `john` with password `123`) and rejection of incorrect passwords.
 
 ---
 
@@ -40,7 +40,7 @@ Log in as the **Administrator** (`username: admin` | `password: 123`) and verify
 
 ## 👤 3. Employee Manual Regression Checklist
 
-Log in as an **Employee** (e.g. `username: john` | `password: 123`) and verify the following:
+Log in as an **Employee** (e.g. `username: mitu` | `password: 123`) and verify the following:
 
 - [ ] **Personal Metrics**: Dashboard counters should only show tasks assigned specifically to the logged-in employee.
 - [ ] **Work Backlog**: Ensure **My Tasks** displays only the items belonging to the current user's profile.
@@ -51,7 +51,7 @@ Log in as an **Employee** (e.g. `username: john` | `password: 123`) and verify t
 
 ## 🔔 4. Asynchronous Alerts & Notifications Checklist
 
-- [ ] **Badge Count**: Assign a new task from the administrator panel to `john`. Keep `john` logged in on a second tab. Observe the bell icon's notification badge update asynchronously within 5 seconds.
+- [ ] **Badge Count**: Assign a new task from the administrator panel to `mitu`. Keep `mitu` logged in on a second tab. Observe the bell icon's notification badge update asynchronously within 5 seconds.
 - [ ] **Bell Dropdown**: Click the bell icon. A dynamic dropdown list should load.
 - [ ] **Read State Toggle**: Click on an unread notification link. Ensure it marks the notification as read in the database and redirects the employee to their dashboard.
 

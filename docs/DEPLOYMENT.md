@@ -68,7 +68,7 @@ Follow these standard practices when deploying KajTrack to public-facing cloud i
 > Before going live, make sure to execute all of the following hardening steps:
 
 - [ ] **Enforce TLS**: Set up an SSL certificate (e.g. Let's Encrypt) and force all traffic to HTTPS.
-- [ ] **Change Passwords**: Immediately reset default account passwords (`admin`, `john`, etc.) through the user management interface.
+- [ ] **Change Passwords**: Immediately reset default account passwords (`admin`, `tasnim`, `mitu`, `john`, etc.) through the user management interface.
 - [ ] **Secure Cookies**: In production, configure secure session cookies by editing `bootstrap.php` or `php.ini` to set:
   ```php
   ini_set('session.cookie_secure', 1);
